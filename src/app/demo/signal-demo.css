@@ -20,7 +20,7 @@ body:has(.signal-demo) .clerk-account-control { display: none !important; }
 .demo-ribbon { min-height: 34px; display: flex; align-items: center; justify-content: center; gap: 9px; color: #322d00; background: var(--sd-yellow); font-size: 10px; font-weight: 800; letter-spacing: .12em; }
 .demo-ribbon span { margin-left: 5px; color: #5f5712; font-size: 10px; font-weight: 500; letter-spacing: 0; }
 .demo-layout { min-height: calc(100vh - 34px); display: flex; }
-.demo-sidebar { position: fixed; z-index: 8; inset: 34px auto 0 0; width: 248px; display: flex; flex-direction: column; padding: 18px 15px 14px; color: #f7f7f3; background: #151615; }
+.demo-sidebar { position: fixed; z-index: 8; inset: 34px auto 0 0; width: 248px; display: flex; flex-direction: column; overflow-y: auto; padding: 18px 15px 14px; color: #f7f7f3; background: #151615; }
 .demo-brand { height: 61px; display: flex; align-items: center; padding: 5px 10px; }
 .demo-brand img { width: 100%; max-height: 52px; object-fit: contain; }
 .demo-workspace { width: 100%; min-height: 61px; display: flex; align-items: center; gap: 10px; margin: 16px 0 27px; padding: 9px; border: 1px solid #333531; border-radius: 10px; color: #fff; background: #20211e; text-align: left; }
@@ -164,6 +164,47 @@ body:has(.signal-demo) .clerk-account-control { display: none !important; }
 .demo-modal-note { margin: 12px 0 0; color: #92968f; font-size: 9px; text-align: right; }
 .demo-toast { position: fixed; z-index: 40; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 8px; padding: 12px 15px; border: 1px solid #dfe0da; border-radius: 10px; color: #2e3f25; background: #fff; box-shadow: 0 8px 30px #1718141c; font-size: 11px; }
 .demo-toast svg { color: #668347; }
+.demo-special-card { padding-bottom: 14px; }
+.demo-special-actions { display: flex; align-items: center; gap: 7px; }
+.demo-special-actions select { min-height: 34px; max-width: 145px; padding: 0 8px; border: 1px solid #e1e2dc; border-radius: 7px; color: #555950; background: #fff; font-size: 10px; }
+.demo-table-scroll { overflow-x: auto; }
+.demo-table { min-width: 775px; }
+.demo-table-head, .demo-table-row { display: grid; grid-template-columns: minmax(205px, 1.65fr) .8fr .85fr .7fr .9fr .6fr auto; align-items: center; gap: 12px; }
+.demo-table-head { min-height: 34px; padding: 0 9px; border-bottom: 1px solid #e8e9e3; color: #898d85; font: 9px "DM Mono", monospace; letter-spacing: .07em; }
+.demo-table-row { min-height: 62px; padding: 5px 9px; border-bottom: 1px solid #eff0ec; color: #686d65; font-size: 10px; }
+.demo-table-row:last-child { border-bottom: 0; }
+.demo-table-row > b { color: #343630; font-size: 10px; }
+.campaign-name { min-width: 0; display: flex; align-items: center; gap: 9px; }
+.campaign-name > i { width: 31px; height: 31px; display: grid; flex: 0 0 31px; place-items: center; border-radius: 9px; color: #1e1f1a; background: #fff2a5; font-style: normal; }
+.campaign-name > b { min-width: 0; display: grid; gap: 3px; overflow: hidden; color: #33352f; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.campaign-name small { color: #92968f; font-size: 9px; font-weight: 400; }
+.demo-table-row > span:nth-child(3) { display: inline-flex; align-items: center; gap: 6px; }
+.delivery-dot { width: 7px; height: 7px; border-radius: 50%; background: #adb0a9; }
+.delivery-dot.on { background: #7fb344; }
+.delivery-dot.off { background: #db9c4e; }
+.demo-safety-note { display: flex; align-items: flex-start; gap: 10px; margin-top: 13px; padding: 12px; border: 1px solid #eee4a2; border-radius: 9px; color: #514c17; background: #fffceb; }
+.demo-safety-note > span { width: 28px; height: 28px; display: grid; flex: 0 0 28px; place-items: center; border-radius: 8px; color: #292711; background: #ffea66; }
+.demo-safety-note > div { display: grid; gap: 3px; }
+.demo-safety-note b { font-size: 10px; }
+.demo-safety-note small { color: #757044; font-size: 9px; line-height: 1.5; }
+.demo-email-list { display: grid; }
+.demo-email-list article { min-height: 68px; display: flex; align-items: center; gap: 11px; border-top: 1px solid #eff0ec; }
+.demo-email-list article:first-child { border-top: 1px solid #eff0ec; }
+.email-campaign-copy { min-width: 0; flex: 1; display: grid; gap: 4px; }
+.email-campaign-copy b { overflow: hidden; color: #33352f; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.email-campaign-copy span { color: #858981; font-size: 9px; }
+.email-campaign-copy i { font-style: normal; }
+.email-status { padding: 5px 8px; border-radius: 20px; font-size: 9px; white-space: nowrap; }
+.email-status.draft { color: #6d6582; background: #f3effa; }
+.email-status.review { color: #845b21; background: #fff2d8; }
+.demo-note-row { min-height: 82px; display: flex; align-items: flex-start; gap: 10px; padding: 13px 0; border-top: 1px solid #eff0ec; }
+.demo-note-row > div { min-width: 0; flex: 1; }
+.demo-note-row > div > b { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; color: #33352f; font-size: 11px; }
+.demo-note-row small { color: #92968f; font-size: 9px; font-weight: 400; white-space: nowrap; }
+.demo-note-row p { margin: 5px 0 0; color: #747971; font-size: 10px; line-height: 1.5; }
+.demo-note-compose { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 285px; padding: 23px; background: #fffdf0; }
+.demo-note-compose h2 { max-width: 210px; margin: 6px 0 8px; color: #1b1c19; font: 700 18px/1.25 Manrope, sans-serif; letter-spacing: -.035em; }
+.demo-note-compose p { margin: 0 0 17px; color: #747971; font-size: 11px; line-height: 1.6; }
 
 @media (max-width: 1120px) {
   .demo-sidebar { width: 220px; }
@@ -173,6 +214,7 @@ body:has(.signal-demo) .clerk-account-control { display: none !important; }
   .demo-metrics { gap: 10px; }
   .demo-metric { padding-inline: 13px; }
   .metric-value { font-size: 23px; }
+  .demo-special-actions select { max-width: 120px; }
 }
 @media (max-width: 900px) {
   .demo-sidebar { width: 248px; transform: translateX(-105%); transition: transform .2s ease; box-shadow: 15px 0 35px #0002; }
@@ -227,6 +269,14 @@ body:has(.signal-demo) .clerk-account-control { display: none !important; }
   .demo-client-cards article > span:not(.demo-client-avatar) { align-self: start; }
   .demo-client-cards article > small { display: none; }
   .demo-client-cards .demo-link-button { grid-column: 3; grid-row: 1 / span 2; margin: 0; }
+  .demo-special-card { padding: 14px 12px; }
+  .demo-special-actions { flex-wrap: wrap; justify-content: flex-end; }
+  .demo-special-actions select { max-width: 108px; }
+  .demo-card-heading:has(.demo-special-actions) { align-items: flex-start; flex-direction: column; }
+  .demo-note-row > div > b { align-items: flex-start; flex-direction: column; gap: 2px; }
+  .demo-email-list article { flex-wrap: wrap; padding: 9px 0; }
+  .email-campaign-copy { flex: 1 1 calc(100% - 50px); }
+  .email-status { margin-left: 41px; }
   .demo-footer-note { flex-direction: column; gap: 6px; }
   .demo-toast { right: 12px; bottom: 12px; left: 12px; justify-content: center; }
 }
