@@ -421,7 +421,37 @@ html[data-theme="dark"] :is(.modal-heading h2, .local-modal-heading h2, .live-ap
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 /* Clerk account and organization onboarding, shown only after tenant scoping is enabled. */
-.clerk-account-control { position: fixed; z-index: 1200; inset: 12px 14px auto auto; display: flex; align-items: center; }
+.clerk-account-control { position: fixed; z-index: 1200; inset: 12px 14px auto auto; display: inline-flex; align-items: center; gap: 6px; max-width: calc(100vw - 28px); }
+.clerk-account-control > * { min-width: 0; }
+body:has(.clerk-account-control) .social-topbar .topbar-avatar,
+body:has(.clerk-account-control) .local-topbar .top-user-avatar { display: none; }
+@media (min-width: 901px) and (max-width: 1360px) {
+  .social-topbar, .local-topbar, .live-app .topbar { padding-right: clamp(230px, 21vw, 260px); }
+  .social-topbar .topbar-actions, .local-top-actions, .live-app .topbar-actions { gap: 8px; }
+  .social-topbar .search-box { width: clamp(160px, 17vw, 210px); }
+  .social-topbar .search-box kbd, .local-search kbd { display: none; }
+}
+@media (max-width: 900px) {
+  .social-topbar, .local-topbar, .live-app .topbar {
+    height: auto;
+    min-height: 0;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 8px;
+    padding: 52px 16px 10px;
+  }
+  .social-topbar .topbar-left, .local-topbar-left, .live-app .topbar > .breadcrumb { flex: 1 1 100%; min-width: 0; }
+  .social-topbar .topbar-actions, .local-top-actions, .live-app .topbar-actions {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 7px;
+  }
+  .social-topbar .search-box, .local-search { width: 100%; min-width: 0; flex: 1 1 100%; }
+  .social-topbar .search-box kbd, .local-search kbd { display: none; }
+}
 .clerk-auth-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #0b0b0b; color: #f5f5ef; }
 .clerk-onboarding { width: min(100%, 520px); display: grid; justify-items: center; gap: 12px; text-align: center; padding: 28px; border: 1px solid #343434; border-radius: 18px; background: #171717; }
 .clerk-onboarding h1 { margin: 0; font-size: clamp(28px, 5vw, 40px); }
