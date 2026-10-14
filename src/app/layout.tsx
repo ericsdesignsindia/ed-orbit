@@ -11,7 +11,7 @@ import "./ui-polish.css";
 import "./brand-refresh.css";
 
 export const metadata: Metadata = {
-  title: "Signal — Social media operations",
+  title: "SIGNAL — Social media operations",
   description: "A focused workspace for managing social media across client accounts.",
 };
 
