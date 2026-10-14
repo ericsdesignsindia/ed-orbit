@@ -25,7 +25,7 @@ async function validSession(value: string | undefined, secret: string): Promise<
 
 export async function middleware(request: NextRequest, event: NextFetchEvent) {
   // The sample SIGNAL tour is intentionally public and contains no real client data.
-  if (request.nextUrl.pathname === "/demo") return NextResponse.next();
+  if (request.nextUrl.pathname === "/demo" || request.nextUrl.pathname === "/signal-logo-landscape.jpg") return NextResponse.next();
   if (clerkReady()) return clerkHandler(request, event);
   if (process.env.VERCEL !== "1") return NextResponse.next();
   const { pathname } = request.nextUrl;
