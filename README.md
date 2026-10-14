@@ -1,3 +1,8 @@
+# ed-orbit
+
+SEO App
+
+<<<<<<< HEAD
 # LocalPilot / SEO Command Center / Signal
 
 A single-user agency workspace with a local mode and a private Vercel mode. **LocalPilot** is the home screen for programmatic local service pages, localized copy, schema health, Google Business Profile sync, and lead tracking. **Signal** remains available at `/social` for client rosters, social profile records, content planning, review queues, notes, manual metrics, and CSV exports. **SEO Command Center** is available at `/seo` for authorized crawls, findings, organic reporting, schedules, and durable storage.
@@ -181,3 +186,8 @@ Tests using mocked Google, SMTP, and WordPress responses are **not** proof of a 
 - No automatic indexing promise or general Google “force index” action.
 - WordPress support is bounded native-field editing with explicit approval—not unattended SEO-plugin publishing.
 - Local scheduled work stops when the local server/computer is off; hosted schedules run through the Vercel daily cron and may be delayed on Hobby. Reconnecting expired Google authorization may require user consent.
+=======
+# ed-orbit
+SEO App
+>>>>>>> origin/main
+
