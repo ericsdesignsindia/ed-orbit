@@ -1,0 +1,36 @@
+{
+  "name": "seo-command-center",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/lib/*.test.ts",
+    "test:smoke": "tsx scripts/smoke.ts",
+    "test:server": "tsx scripts/server-smoke.ts"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^7.9.15",
+    "@neondatabase/serverless": "^1.2.0",
+    "cheerio": "^1.2.0",
+    "ipaddr.js": "^2.5.0",
+    "lucide-react": "^0.468.0",
+    "next": "^15.5.0",
+    "nodemailer": "^10.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

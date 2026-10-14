@@ -1,0 +1,492 @@
+/* Shared finishing pass for the Signal and SEO workspaces. */
+:root {
+  --signal-muted: #5f6d63;
+  --signal-soft: #748178;
+  --signal-line: #dfe5dc;
+  --seo-muted: #5f6d60;
+  --seo-line: #dfe5db;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+summary,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #779b45;
+  outline-offset: 3px;
+}
+
+.social-app {
+  --signal-muted: #5f6d63;
+  --signal-soft: #748178;
+  --signal-line: #dfe5dc;
+}
+
+.social-app .breadcrumb,
+.social-app .sidebar-section-label,
+.social-app .client-filter-label,
+.social-app .metric-label,
+.social-app .metric-bottom,
+.social-app .chart-total small,
+.social-app .chart-legend,
+.social-app .chart-y-labels,
+.social-app .chart-x-labels,
+.social-app .attention-item small,
+.social-app .queue-tabs button,
+.social-app .post-main > span,
+.social-app .post-date span,
+.social-app .queue-footer,
+.social-app .empty-queue,
+.social-app .pulse-handle,
+.social-app .pulse-details,
+.social-app .pulse-last,
+.social-app .social-footer {
+  color: #68766c;
+}
+
+.social-app .client-filter > span:not(.client-avatar),
+.social-app .metric-source,
+.social-app .client-count,
+.social-app .post-main > span,
+.social-app .post-date span,
+.social-app .pulse-handle,
+.social-app .pulse-last,
+.social-app .social-footer {
+  color: #69776d;
+}
+
+.social-app .metric-bottom,
+.social-app .pulse-details,
+.social-app .post-main > span,
+.social-app .post-date span,
+.social-app .queue-footer,
+.social-app .empty-queue span,
+.social-app .pulse-handle,
+.social-app .pulse-last,
+.social-app .social-footer {
+  font-size: 10px;
+}
+
+.social-app .topbar-icon-button,
+.social-app .more-button,
+.social-app .close-button,
+.social-app .sidebar-nav button,
+.social-app .sidebar-clients button,
+.social-app .sidebar-settings {
+  color: #5d6c62;
+}
+
+.social-app .search-box input::placeholder { color: #6f7d73; }
+.social-app .queue-tabs button { color: #66756b; }
+.social-app .queue-tabs button.active { color: #435b32; }
+.social-app .empty-queue { color: #65746a; }
+.social-app .empty-queue strong { color: #43554a; }
+.social-app .metric-card,
+.social-app .panel,
+.live-app .card {
+  border-color: #dfe5dc;
+  box-shadow: 0 5px 18px rgba(35, 48, 42, .045);
+}
+
+.social-app .metric-card:hover,
+.social-app .panel:hover,
+.live-app .card:hover {
+  border-color: #d2dccb;
+}
+
+.live-app {
+  --seo-muted: #5f6d60;
+  --seo-line: #dfe5db;
+}
+
+.live-app .breadcrumb,
+.live-app .local-badge,
+.live-app .page-heading p,
+.live-app .kpi-label,
+.live-app .kpi small,
+.live-app .body-copy,
+.live-app .live-panel-heading p,
+.live-app .check-row p,
+.live-app .wizard-steps p,
+.live-app .site-toolbar label,
+.live-app .property-fields label,
+.live-app .page-footer,
+.live-app .issue-filters label,
+.live-app .source-status {
+  color: #5f6d60;
+}
+
+.live-app .eyebrow { color: #657465; }
+.live-app .workspace-switch small,
+.live-app .profile small { color: #66736a; }
+.live-app .nav-label { color: #69766c; }
+.live-app .growth-card p { color: #5e6e59; }
+.live-app .sidebar nav .nav-item { color: #536159; }
+.live-app .sidebar nav .nav-item svg { color: #657469; }
+.live-app .website-card,
+.live-app .integration-grid article,
+.live-app .site-toolbar,
+.live-app .audit-scope {
+  border-color: #dfe5db;
+}
+
+.live-app input::placeholder,
+.live-app textarea::placeholder { color: #66746a; opacity: 1; }
+.live-app details > summary { color: #365c49; }
+
+/* Signal brand palette: charcoal, white, and the yellow from the logo. */
+.social-app {
+  --signal-ink: #171717;
+  --signal-muted: #555555;
+  --signal-soft: #777777;
+  --signal-line: #e5e5e5;
+  --signal-bg: #f7f7f5;
+  --signal-card: #ffffff;
+  --signal-lime: #ffdf00;
+  --signal-lime-deep: #c9ae00;
+  --signal-green: #333333;
+  --signal-shadow: 0 8px 24px rgba(0, 0, 0, .055);
+}
+
+.social-app button:focus-visible,
+.social-app a:focus-visible,
+.social-app input:focus-visible,
+.social-app select:focus-visible,
+.social-app textarea:focus-visible,
+.social-app summary:focus-visible,
+.social-app [role="button"]:focus-visible {
+  outline-color: #d2b800;
+}
+
+.social-app .social-sidebar { border-color: #e5e5e5; background: #fff; }
+.social-app .social-topbar { border-color: #e5e5e5; background: rgba(255, 255, 255, .92); }
+.social-app .signal-mark { border-color: #171717; background: #ffdf00; }
+.social-app .signal-mark::before,
+.social-app .signal-mark::after,
+.social-app .signal-mark span { background: #171717; }
+.social-app .workspace-symbol { color: #171717; background: #fff3a6; }
+.social-app .sidebar-nav button.active,
+.social-app .sidebar-clients button.selected { color: #171717; background: #fff4a8; }
+.social-app .sidebar-nav button.active::before { background: #ffdf00; }
+.social-app .sidebar-nav button.active svg { color: #171717; }
+.social-app .nav-badge { color: #171717; background: #ffdf00; }
+.social-app .sidebar-nav button:hover,
+.social-app .sidebar-clients button:hover,
+.social-app .sidebar-settings:hover { background: #fff9d6; }
+.social-app .help-card { border-color: #f0df70; color: #292400; background: #fff9d6; }
+.social-app .help-card small,
+.social-app .help-card p { color: #695e18; }
+.social-app .help-card > svg,
+.social-app .help-icon { color: #171717; }
+.social-app .help-icon { background: #ffdf00; }
+.social-app .button.primary {
+  border-color: #d3b900;
+  color: #171717;
+  background: #ffdf00;
+  box-shadow: 0 3px 0 rgba(120, 102, 0, .13);
+}
+.social-app .button.primary:hover { background: #ffe84d; }
+.social-app .button.secondary:hover,
+.social-app .topbar-icon-button:hover,
+.social-app .more-button:hover,
+.social-app .close-button:hover { background: #fff9d6; }
+.social-app .client-filter.active,
+.social-app .select-button.selected { border-color: #eddb55; color: #292400; background: #fff7c2; }
+.social-app .legend-swatch.reach,
+.social-app .social-spinning,
+.social-app .workspace-switch-track.on { background: #ffdf00; color: #171717; }
+.social-app .chart-bar,
+.social-app .chart-bar.recent,
+.social-app .real-reach { background: #e2c500; }
+.social-app .chart-bar::after,
+.social-app .real-reach::after { content: none; }
+.social-app .chart-line,
+.social-app .sparkline path { stroke: #b39b00; }
+.social-app .chart-bar,
+.social-app .bar-chart rect { fill: #e2c500; }
+.social-app .calendar-add:hover,
+.social-app .add-client-card:hover { color: #171717; border-color: #d3b900; background: #fff9d6; }
+.social-app .campaign-intro-note,
+.social-app .campaign-notice,
+.social-app .campaign-token-count { border-color: #eddf86; color: #514600; background: #fff9d6; }
+.social-app .campaign-step-mark { color: #171717; background: #ffdf00; }
+.social-app .campaign-option.selected,
+.social-app .campaign-tone.selected,
+.social-app .campaign-token:has(input:checked),
+.social-app .campaign-email-tab.selected { border-color: #e3cd3d; color: #292400; background: #fff7c2; }
+.social-app .campaign-option.selected { box-shadow: inset 3px 0 #e2c500; }
+.social-app .campaign-token input { accent-color: #c9ae00; }
+.social-app .campaign-email-tab.selected .campaign-email-number { color: #171717; background: #ffdf00; }
+.social-app .campaign-live-preview span { background: #e2c500; box-shadow: 0 0 0 3px #fff4a8; }
+.social-app .campaign-form input:focus,
+.social-app .campaign-form select:focus,
+.social-app .campaign-form textarea:focus,
+.social-app .recipient-fields input:focus,
+.social-app .campaign-editor input:focus,
+.social-app .campaign-editor textarea:focus { border-color: #d3b900; box-shadow: 0 0 0 3px #fff4a8; }
+
+.workspace-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+
+.workspace-tool-button {
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #53645a;
+  background: transparent;
+}
+
+.workspace-tool-button:hover:not(:disabled) {
+  border-color: #dce5d7;
+  color: #2f493a;
+  background: #eef3e9;
+}
+
+.workspace-tool-button:disabled { opacity: .65; }
+.workspace-tool-button.is-refreshing svg { animation: workspace-spin .8s linear infinite; }
+@keyframes workspace-spin { to { transform: rotate(360deg); } }
+
+.workspace-auto-toggle {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 7px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #53645a;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.workspace-auto-toggle:hover { border-color: #dce5d7; background: #eef3e9; }
+.workspace-switch-track { width: 25px; height: 15px; display: inline-flex; align-items: center; padding: 2px; border-radius: 10px; background: #aab4ac; transition: background .18s; }
+.workspace-switch-track > span { width: 11px; height: 11px; border-radius: 50%; background: #fff; transition: transform .18s; }
+.workspace-switch-track.on { background: #91ae4b; }
+.workspace-switch-track.on > span { transform: translateX(10px); }
+
+.live-app .topbar-actions { display: inline-flex; align-items: center; gap: 10px; }
+.live-app .topbar-actions .local-badge { white-space: nowrap; }
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  background: #111813;
+  color: #e6ece7;
+}
+
+html[data-theme="dark"] body { background: #111813; color: #e6ece7; }
+html[data-theme="dark"] .social-app {
+  --signal-ink: #f2f2f2;
+  --signal-muted: #bdbdbd;
+  --signal-soft: #a0a0a0;
+  --signal-line: #393939;
+  --signal-bg: #111111;
+  --signal-card: #1d1d1d;
+  --signal-lime: #ffdf00;
+  --signal-lime-deep: #d2b800;
+  --signal-green: #d0d0d0;
+  background: var(--signal-bg);
+  color: var(--signal-ink);
+}
+
+html[data-theme="dark"] .social-sidebar,
+html[data-theme="dark"] .social-topbar { border-color: #303030; background: #171717; }
+html[data-theme="dark"] .sidebar-brand,
+html[data-theme="dark"] .workspace-picker,
+html[data-theme="dark"] .page-intro h1,
+html[data-theme="dark"] .panel-heading h2,
+html[data-theme="dark"] .metric-value-row strong,
+html[data-theme="dark"] .post-main strong,
+html[data-theme="dark"] .post-title-button,
+html[data-theme="dark"] .client-pulse > strong { color: #e7eee8; }
+html[data-theme="dark"] .workspace-picker,
+html[data-theme="dark"] .search-box,
+html[data-theme="dark"] .client-filter-bar,
+html[data-theme="dark"] .metric-card,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .calendar-board,
+html[data-theme="dark"] .client-pulse,
+html[data-theme="dark"] .modal-card,
+html[data-theme="dark"] .settings-backup,
+html[data-theme="dark"] .meta-connect-card { border-color: #393939; background-color: #1d1d1d; }
+html[data-theme="dark"] .social-app .button.secondary,
+html[data-theme="dark"] .social-app .pagination button,
+html[data-theme="dark"] .social-app .today-button,
+html[data-theme="dark"] .social-app .restore-file-button,
+html[data-theme="dark"] .social-app .select-button { border-color: #3a4940; color: #d1dbd3; background: #202c24; }
+html[data-theme="dark"] .social-app input,
+html[data-theme="dark"] .social-app select,
+html[data-theme="dark"] .social-app textarea,
+html[data-theme="dark"] .search-box input { border-color: #3a4940; color: #e7eee8; background-color: #17211b; }
+html[data-theme="dark"] .social-app input::placeholder,
+html[data-theme="dark"] .social-app textarea::placeholder { color: #9aa89e; }
+html[data-theme="dark"] .sidebar-nav button.active,
+html[data-theme="dark"] .sidebar-clients button.selected,
+html[data-theme="dark"] .queue-tabs,
+html[data-theme="dark"] .queue-tabs button.active,
+html[data-theme="dark"] .help-card,
+html[data-theme="dark"] .data-banner:not(.error),
+html[data-theme="dark"] .campaigns-toolbar,
+html[data-theme="dark"] .campaign-option.selected,
+html[data-theme="dark"] .campaign-tone.selected,
+html[data-theme="dark"] .campaign-token:has(input:checked) { border-color: #43583e; color: #d4e5be; background: #263424; }
+html[data-theme="dark"] .post-row,
+html[data-theme="dark"] .post-list,
+html[data-theme="dark"] .calendar-column,
+html[data-theme="dark"] .attention-item,
+html[data-theme="dark"] .social-footer,
+html[data-theme="dark"] .pulse-details { border-color: #303d34; }
+html[data-theme="dark"] .post-row:hover,
+html[data-theme="dark"] .calendar-post,
+html[data-theme="dark"] .calendar-post:hover,
+html[data-theme="dark"] .client-filter:hover,
+html[data-theme="dark"] .client-pulse:hover,
+html[data-theme="dark"] .campaign-form input,
+html[data-theme="dark"] .campaign-form select,
+html[data-theme="dark"] .campaign-form textarea,
+html[data-theme="dark"] .recipient-fields input,
+html[data-theme="dark"] .campaign-editor input,
+html[data-theme="dark"] .campaign-editor textarea,
+html[data-theme="dark"] .campaign-option,
+html[data-theme="dark"] .campaign-token { border-color: #354239; color: #dce5de; background: #202b24; }
+html[data-theme="dark"] .social-app .eyebrow,
+html[data-theme="dark"] .social-app .breadcrumb,
+html[data-theme="dark"] .social-app .page-intro p,
+html[data-theme="dark"] .social-app .metric-label,
+html[data-theme="dark"] .social-app .metric-bottom,
+html[data-theme="dark"] .social-app .attention-item small,
+html[data-theme="dark"] .social-app .post-client,
+html[data-theme="dark"] .social-app .post-date,
+html[data-theme="dark"] .social-app .social-footer,
+html[data-theme="dark"] .social-app .pulse-details { color: #aab8ae; }
+html[data-theme="dark"] .workspace-tool-button,
+html[data-theme="dark"] .workspace-auto-toggle { color: #c4d0c7; }
+html[data-theme="dark"] .workspace-tool-button:hover:not(:disabled),
+html[data-theme="dark"] .workspace-auto-toggle:hover { border-color: #425348; color: #eef6ef; background: #26342a; }
+
+html[data-theme="dark"] .social-app .button.primary { border-color: #d2b800; color: #171717; background: #ffdf00; }
+html[data-theme="dark"] .sidebar-nav button.active,
+html[data-theme="dark"] .sidebar-clients button.selected,
+html[data-theme="dark"] .queue-tabs button.active,
+html[data-theme="dark"] .campaign-option.selected,
+html[data-theme="dark"] .campaign-tone.selected,
+html[data-theme="dark"] .campaign-token:has(input:checked),
+html[data-theme="dark"] .campaign-email-tab.selected { border-color: #776900; color: #fff2a3; background: #38320e; }
+html[data-theme="dark"] .sidebar-nav button.active::before { background: #ffdf00; }
+html[data-theme="dark"] .sidebar-nav button.active svg,
+html[data-theme="dark"] .workspace-tool-button:hover:not(:disabled),
+html[data-theme="dark"] .workspace-auto-toggle:hover { color: #ffdf00; }
+html[data-theme="dark"] .help-card,
+html[data-theme="dark"] .data-banner:not(.error),
+html[data-theme="dark"] .campaigns-toolbar { border-color: #504817; color: #eee4a6; background: #28240e; }
+html[data-theme="dark"] .workspace-symbol,
+html[data-theme="dark"] .help-icon,
+html[data-theme="dark"] .campaign-step-mark,
+html[data-theme="dark"] .campaign-email-tab.selected .campaign-email-number { color: #171717; background: #ffdf00; }
+html[data-theme="dark"] .social-app .client-filter.active,
+html[data-theme="dark"] .social-app .select-button.selected { border-color: #776900; color: #fff2a3; background: #38320e; }
+html[data-theme="dark"] .social-app .chart-line,
+html[data-theme="dark"] .social-app .sparkline path { stroke: #ffdf00; }
+html[data-theme="dark"] .social-app .chart-bar,
+html[data-theme="dark"] .social-app .chart-bar.recent,
+html[data-theme="dark"] .social-app .real-reach { background: #d9bd00; }
+html[data-theme="dark"] .social-app .chart-bar,
+html[data-theme="dark"] .social-app .bar-chart rect { fill: #d9bd00; }
+html[data-theme="dark"] .social-app .legend-swatch.reach,
+html[data-theme="dark"] .social-app .workspace-switch-track.on { background: #ffdf00; }
+html[data-theme="dark"] .social-app button:focus-visible,
+html[data-theme="dark"] .social-app a:focus-visible,
+html[data-theme="dark"] .social-app input:focus-visible,
+html[data-theme="dark"] .social-app select:focus-visible,
+html[data-theme="dark"] .social-app textarea:focus-visible { outline-color: #ffdf00; }
+
+html[data-theme="dark"] .live-app {
+  --seo-ink: #e7eee8;
+  --seo-muted: #b0bdb2;
+  --seo-line: #354239;
+  --seo-card: #1b251f;
+  --seo-green: #8eb777;
+  --seo-green-dark: #a4c58f;
+  --seo-lime: #c5e76f;
+  background: #111813;
+  color: #e7eee8;
+}
+
+html[data-theme="dark"] .live-app .sidebar,
+html[data-theme="dark"] .live-app .topbar { border-color: #2b382f; background: rgba(21, 30, 24, .96); }
+html[data-theme="dark"] .live-app .brand,
+html[data-theme="dark"] .live-app .page-heading h1,
+html[data-theme="dark"] .live-app .kpi-value,
+html[data-theme="dark"] .live-app h2,
+html[data-theme="dark"] .live-app h3,
+html[data-theme="dark"] .live-app .modal h2 { color: #e7eee8; }
+html[data-theme="dark"] .live-app .workspace-switch,
+html[data-theme="dark"] .live-app .workspace-shortcut,
+html[data-theme="dark"] .live-app .growth-card,
+html[data-theme="dark"] .live-app .card,
+html[data-theme="dark"] .live-app .site-toolbar,
+html[data-theme="dark"] .live-app .integration-grid article,
+html[data-theme="dark"] .live-app .modal,
+html[data-theme="dark"] .live-app .source-status { border-color: #354239; background: #1b251f; }
+html[data-theme="dark"] .live-app .nav-item.active { color: #d7e9c1; background: #293827; }
+html[data-theme="dark"] .live-app .nav-item:hover { color: #eef5ef; background: #202d24; }
+html[data-theme="dark"] .live-app .nav-item,
+html[data-theme="dark"] .live-app .breadcrumb,
+html[data-theme="dark"] .live-app .local-badge,
+html[data-theme="dark"] .live-app .page-heading p,
+html[data-theme="dark"] .live-app .body-copy,
+html[data-theme="dark"] .live-app .kpi-label,
+html[data-theme="dark"] .live-app .kpi small,
+html[data-theme="dark"] .live-app .check-row p,
+html[data-theme="dark"] .live-app .page-footer { color: #aebbb1; }
+html[data-theme="dark"] .live-app input,
+html[data-theme="dark"] .live-app select,
+html[data-theme="dark"] .live-app textarea,
+html[data-theme="dark"] .live-app .button.secondary { border-color: #3a4940; color: #e0e9e1; background: #202b24; }
+html[data-theme="dark"] .live-app .button.primary { border-color: #b7d663; color: #1c2817; background: #c5e76f; }
+html[data-theme="dark"] .live-app .audit-scope,
+html[data-theme="dark"] .live-app .source-status { color: #c1d2b1; background: #253222; }
+html[data-theme="dark"] .live-app th,
+html[data-theme="dark"] .live-app td,
+html[data-theme="dark"] .live-app .check-row,
+html[data-theme="dark"] .live-app .form-grid { border-color: #354239; }
+
+@media (max-width: 760px) {
+  .social-app .social-content { padding-top: 30px; }
+  .live-app .content { padding-top: 24px; }
+}
+
+@media (max-width: 680px) {
+  .social-app .topbar-actions { gap: 5px; }
+  .social-app .workspace-auto-toggle { padding: 0 4px; font-size: 9px; }
+  .live-app .topbar-actions { gap: 4px; }
+  .live-app .local-badge { display: none; }
+  .workspace-tool-button { width: 29px; height: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  .workspace-tool-button.is-refreshing svg,
+  .workspace-switch-track,
+  .workspace-switch-track > span { animation: none; transition: none; }
+}
