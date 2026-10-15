@@ -63,6 +63,8 @@ button, input, select, textarea { accent-color: var(--brand-yellow-deep); }
 .social-sidebar { width: 260px; flex-basis: 260px; padding: 23px 16px 18px; border-color: #272727; background: #151515; color: #f7f7f4; }
 .sidebar-brand { min-height: 68px; display: flex; align-items: center; padding: 8px 10px; }
 .sidebar-brand img { width: 100%; max-height: 64px; object-fit: contain; }
+.social-app .sidebar-brand { width: 168px; min-height: 48px; margin: 0 0 10px; padding: 0; }
+.social-app .sidebar-brand img { max-height: 48px; object-position: left center; }
 .workspace-picker { margin: 20px 0 24px; padding: 11px; border-color: #353535; background: #202020; color: #f6f6f2; box-shadow: none; }
 .workspace-picker strong { color: #f6f6f2; }
 .workspace-picker span, .workspace-picker small, .workspace-picker > svg { color: #a5a5a0; }
