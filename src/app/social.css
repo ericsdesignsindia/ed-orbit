@@ -405,6 +405,22 @@
 .calendar-board-head > span { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-left: 1px solid #f0f2ef; color: #8e9991; font: 9px/1 "DM Mono", monospace; }
 .calendar-board-head > span strong { color: #55645a; font: 700 16px/1 "Manrope", sans-serif; }
 .calendar-board-head > span i { position: absolute; top: 6px; color: #8eaa4f; font: 8px/1 "DM Sans", sans-serif; font-style: normal; }
+.month-planning-calendar { min-width: 840px; }
+.month-weekday-head, .month-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.month-weekday-head { min-height: 38px; align-items: center; border-bottom: 1px solid #edf0ec; color: #8e9991; font: 9px/1 "DM Mono", monospace; text-align: center; }
+.month-day { min-width: 0; min-height: 132px; display: flex; flex-direction: column; padding: 7px; border-left: 1px solid #f0f2ef; border-bottom: 1px solid #f0f2ef; background: #fff; }
+.month-day.is-today { background: #f7faee; }
+.month-day.outside-month { background: #fafbf9; }
+.month-day-heading { display: flex; align-items: center; justify-content: space-between; min-height: 18px; color: #607067; font: 700 10px/1 "Manrope", sans-serif; }
+.month-day-heading > span { color: #7f9d47; font: 8px/1 "DM Sans", sans-serif; }
+.outside-month .month-day-heading { color: #b2bbb4; }
+.month-day-posts { min-height: 0; max-height: 78px; display: grid; align-content: start; gap: 3px; margin-top: 5px; overflow-y: auto; }
+.month-post { width: 100%; min-width: 0; display: flex; align-items: center; gap: 4px; padding: 4px 4px; border: 1px solid #edf0eb; border-left: 2px solid #c8d59a; border-radius: 4px; color: #58665c; background: #fff; text-align: left; }
+.month-post:hover { border-color: #cbdac0; background: #fbfdf8; }
+.month-post > svg { flex: 0 0 auto; }
+.month-post > span { min-width: 0; overflow: hidden; color: #68766d; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.month-day-add { min-height: 20px; display: flex; align-items: center; gap: 3px; margin-top: auto; padding: 2px 4px; border: 0; color: #9daa9e; background: transparent; font-size: 8px; text-align: left; }
+.month-day-add:hover { color: #6d8846; }
 .calendar-columns { display: grid; }
 .calendar-column { min-width: 0; padding: 12px 7px; border-left: 1px solid #f0f2ef; background: repeating-linear-gradient(to bottom, transparent 0, transparent 66px, #f6f7f4 67px, transparent 68px); }
 .today-column { background-color: #f7faee; }
