@@ -63,6 +63,8 @@ button, input, select, textarea { accent-color: var(--brand-yellow-deep); }
 .social-sidebar { width: 260px; flex-basis: 260px; padding: 23px 16px 18px; border-color: #272727; background: #151515; color: #f7f7f4; }
 .sidebar-brand { min-height: 68px; display: flex; align-items: center; padding: 8px 10px; }
 .sidebar-brand img { width: 100%; max-height: 64px; object-fit: contain; }
+.social-app .sidebar-brand { width: 168px; min-height: 48px; margin: 0 0 10px; padding: 0; }
+.social-app .sidebar-brand img { width: 100%; max-height: 48px; object-fit: contain; object-position: left center; }
 .workspace-picker { margin: 20px 0 24px; padding: 11px; border-color: #353535; background: #202020; color: #f6f6f2; box-shadow: none; }
 .workspace-picker strong { color: #f6f6f2; }
 .workspace-picker span, .workspace-picker small, .workspace-picker > svg { color: #a5a5a0; }
@@ -159,7 +161,7 @@ button, input, select, textarea { accent-color: var(--brand-yellow-deep); }
 .live-app .sidebar { flex-basis: 260px; width: 260px; border-color: #272727; background: #151515; }
 .live-app .brand { color: #f7f7f3; font-size: 18px; }
 .live-app .brand.seo-command-center-brand { width: 100%; min-height: 60px; justify-content: flex-start; padding: 0 5px; }
-.live-app .brand-logo { display: block; width: 100%; max-width: 220px; height: 54px; object-fit: contain; object-position: left center; }
+.live-app .brand-logo { display: block; width: 100%; max-width: 168px; height: 48px; object-fit: contain; object-position: left center; }
 .live-app .brand-mark { border-radius: 9px; background: var(--brand-yellow); }
 .live-app .brand-mark span { border-color: #171717; }
 .live-app .workspace-switch { border-color: #353535; border-radius: 11px; background: #202020; }

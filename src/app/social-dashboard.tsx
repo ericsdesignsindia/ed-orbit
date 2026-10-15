@@ -177,7 +177,7 @@ export default function SocialDashboard({ showSeoLink = true, hosted = false }: 
   return <div className="social-app">
     {mobile && <button className="mobile-nav-backdrop visible" aria-label="Close navigation" onClick={() => setMobile(false)} />}
     <aside className={`social-sidebar ${mobile ? "open" : ""}`}>
-      <a className="sidebar-brand" href="/" aria-label="Signal home" onClick={event => { event.preventDefault(); goHome(); }}><img src="/signal-logo-landscape.jpg" alt="Signal by Eric's Designs" /></a>
+      <a className="sidebar-brand" href="/" aria-label="Signal home" onClick={event => { event.preventDefault(); goHome(); }}><img src="/signal-home-logo.png" alt="Signal by Eric's Designs" /></a>
       <button className="workspace-picker" onClick={() => setDialog({ kind: "settings" })}><span className="workspace-symbol"><Command size={16} /></span><span className="workspace-picker-copy"><strong>{snapshot?.agencyName ?? "Your agency"}</strong><small>Social media workspace</small></span><ChevronDown size={14} /></button>
       <div className="sidebar-section-label">WORKSPACE</div>
       <nav className="sidebar-nav" aria-label="Main navigation">{navigation.map(({ label, icon: Icon }) => { const isHome = label === "Overview"; return <button key={label} className={view === label ? "active" : ""} aria-current={view === label ? "page" : undefined} onClick={() => isHome ? goHome() : navigate(label)}><Icon size={18} /><span>{isHome ? "Home" : label}</span>{label === "Client notes" && openNotes > 0 && <span className="nav-badge">{openNotes}</span>}</button>; })}</nav>
