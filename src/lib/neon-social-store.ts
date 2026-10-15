@@ -48,11 +48,11 @@ export function createNeonSocialStore(connectionString: string, tenantId = "lega
     )`;
     const backupCte = backup ? `, saved AS (
       INSERT INTO signal_tenant_recovery_snapshots (tenant_id, revision, created_at, body)
-      SELECT $1, revision, $3::timestamptz, body FROM previous
+      SELECT $1, revision, $4::timestamptz, body FROM previous
       ON CONFLICT (tenant_id, revision) DO NOTHING
     )` : "";
     const query = `${common}${backupCte}, updated AS (
-      UPDATE signal_workspace AS current
+      UPDATE signal_tenant_workspaces AS current
       SET body = $3::jsonb, revision = current.revision + 1, updated_at = $4::timestamptz
       FROM previous
       WHERE current.tenant_id = $1 AND current.revision = previous.revision
