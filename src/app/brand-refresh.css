@@ -85,6 +85,7 @@ button, input, select, textarea { accent-color: var(--brand-yellow-deep); }
 .sidebar-user strong { color: #f0f0eb; }
 .sidebar-user span:not(.user-avatar) { color: #9b9b95; }
 .social-topbar { position: sticky; top: 0; z-index: 4; height: 66px; padding: 0 clamp(18px, 3.2vw, 46px); border-color: var(--brand-line); background: rgba(255,255,255,.94); backdrop-filter: blur(15px); }
+.social-mobile-home-brand { display: none; }
 .breadcrumb { color: #858984; }
 .breadcrumb strong { color: #20211f; }
 .topbar-actions { gap: 12px; }
@@ -182,6 +183,7 @@ button, input, select, textarea { accent-color: var(--brand-yellow-deep); }
 .live-app .topbar { height: 66px; border-color: var(--brand-line); background: rgba(255,255,255,.94); }
 .live-app .breadcrumb { color: #858984; }
 .live-app .breadcrumb strong { color: #20211f; }
+.live-app .live-mobile-home-brand { display: none; }
 .live-app .local-badge { color: #555954; }
 .live-app .local-badge > span { background: #bba300; box-shadow: 0 0 0 3px #ffdf0033; }
 .live-app .content { width: min(100%, 1480px); padding: 34px clamp(18px, 3.2vw, 46px) 32px; }
@@ -346,6 +348,8 @@ html[data-theme="dark"] :is(.modal-heading h2, .local-modal-heading h2, .live-ap
     padding: 8px 14px;
   }
   .topbar-left { min-width: 0; }
+  .social-mobile-home-brand { display: inline-flex; align-items: center; flex: 0 0 78px; width: 78px; height: 36px; margin-right: 8px; }
+  .social-mobile-home-brand img { display: block; width: 100%; max-height: 34px; object-fit: contain; object-position: left center; }
   .topbar-actions {
     width: 100%;
     min-width: 0;
@@ -390,6 +394,8 @@ html[data-theme="dark"] :is(.modal-heading h2, .local-modal-heading h2, .live-ap
   .live-app .breadcrumb { min-width: 0; gap: 6px; white-space: nowrap; }
   .live-app .breadcrumb > span { display: none; }
   .live-app .mobile-menu { width: 38px; height: 38px; margin: 0; }
+  .live-app .live-mobile-home-brand { display: inline-flex; align-items: center; flex: 0 0 78px; width: 78px; height: 36px; }
+  .live-app .live-mobile-home-brand img { display: block; width: 100%; max-height: 34px; object-fit: contain; object-position: left center; }
   .live-app .topbar-actions { width: 100%; min-width: 0; justify-content: flex-end; }
   .live-app .workspace-controls { gap: 2px; }
   .live-app .workspace-tool-button { width: 36px; min-width: 36px; }
