@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { AppSnapshot, SavedCrawl, SavedReport, ScheduleRecord, SiteRecord, WorkspaceAction, JobRecord, JobKind } from "@/lib/contracts";
 import type { SearchInsight } from "@/lib/google";
 
@@ -41,7 +41,7 @@ export function IssuePanel({ crawl }: { crawl?: SavedCrawl }) {
   </section>;
 }
 
-export function ReportPanel({ report, error }: { report?: SavedReport; error?: string }) {
+export function ReportPanel({ report, error, showInsights = true }: { report?: SavedReport; error?: string; showInsights?: boolean }) {
   const data = report?.data;
   return <section className="card live-panel"><div className="live-panel-heading"><div><h2>Organic performance</h2><p>{report ? `${data?.startDate} to ${data?.endDate} · last saved ${when(report.fetchedAt)}` : "No saved Google report. Connect Search Console or GA4 and load a report."}</p></div></div>
     {error && <div className="notice error-notice" role="alert">Latest refresh failed or was incomplete: {error}. {report ? `Showing the last saved data from ${when(report.fetchedAt)}; it may be stale.` : "No valid report is available yet."}</div>}
@@ -51,12 +51,47 @@ export function ReportPanel({ report, error }: { report?: SavedReport; error?: s
     {data && <><div className="source-status"><span>Search Console: {data.gsc ? "Data returned" : "No data source returned"}</span><span>GA4: {data.ga4 ? "Data returned" : "No data source returned"}</span></div><div className="kpi-grid">{[["Organic clicks", number(data.gsc?.clicks), percent(data.comparison?.changes.clicksPercent)], ["Search impressions", number(data.gsc?.impressions), percent(data.comparison?.changes.impressionsPercent)], ["Search CTR", data.gsc ? `${number(data.gsc.ctr * 100)}%` : "—", data.comparison ? `Previous: ${number(data.comparison.previous.ctr * 100)}%` : "Search Console"], ["Average search position", data.gsc?.impressions ? number(data.gsc.position) : "—", data.comparison ? `Previous: ${number(data.comparison.previous.position)}` : "Impression-weighted"]].map(([label, value, detail]) => <article className="kpi" key={label}><div className="kpi-label">{label}</div><div className="kpi-value">{value}</div><small>{detail}</small></article>)}</div>
       {data.comparison && <p className="body-copy">Compared with {data.comparison.startDate} to {data.comparison.endDate}: {number(data.comparison.previous.clicks)} clicks and {number(data.comparison.previous.impressions)} impressions.</p>}
       {data.ga4 && <><h3>{data.ga4.trafficScope === "organic-search" ? "GA4 · Organic Search channel" : "GA4 · saved report (scope not specified)"}</h3><div className="live-stat-strip"><span>Users <strong>{number(data.ga4.users)}</strong></span><span>Sessions <strong>{number(data.ga4.sessions)}</strong></span><span>Page views <strong>{number(data.ga4.pageViews)}</strong></span><span>Key events <strong>{number(data.ga4.keyEvents)}</strong></span></div></>}
-      <InsightTable title="Search queries" rows={data.queries}/><InsightTable title="Search pages" rows={data.pages}/>
+      {showInsights && <><InsightTable title="Search queries" rows={data.queries}/><InsightTable title="Search pages" rows={data.pages}/></>}
       {!!data.opportunities?.length && <><h3>Search opportunities</h3>{data.opportunities.map(o => <article className="check-row" key={o.id}><span className="badge neutral">{o.type}</span><div><h3>{o.title}</h3><p>{o.detail}</p>{o.url && <p>{o.url}</p>}</div></article>)}</>}
       {!!data.gsc?.rows.length && <details><summary>Daily Search Console values</summary><div className="table-scroll"><table><thead><tr><th>Date</th><th>Clicks</th><th>Impressions</th></tr></thead><tbody>{data.gsc.rows.map(row => <tr key={row.date}><td>{row.date}</td><td>{number(row.clicks)}</td><td>{number(row.impressions)}</td></tr>)}</tbody></table></div></details>}
     </>}
   </section>;
 }
+
+export function KeywordsPanel({ report, error }: { report?: SavedReport; error?: string }) {
+  const [filter, setFilter] = useState("");
+  const [sort, setSort] = useState<"clicks" | "impressions" | "ctr" | "position">("clicks");
+  const [ascending, setAscending] = useState(false);
+  const rows = useMemo(() => {
+    const queries = report?.data.queries ?? [];
+    return queries.filter(row => row.key.toLocaleLowerCase().includes(filter.trim().toLocaleLowerCase()))
+      .sort((a, b) => (a[sort] - b[sort]) * (ascending ? 1 : -1) || a.key.localeCompare(b.key));
+  }, [report, filter, sort, ascending]);
+  const setOrder = (key: typeof sort) => {
+    if (key === sort) setAscending(value => !value);
+    else { setSort(key); setAscending(false); }
+  };
+  const exportRows = () => {
+    const cell = (value: unknown) => {
+      const text = String(value ?? "");
+      return `"${(/^[^a-zA-Z0-9]*[-=+@]/.test(text) ? `'${text}` : text).replaceAll('"', '""')}"`;
+    };
+    const csv = [["Search query", "Clicks", "Impressions", "CTR", "Average position", "Previous clicks", "Click change %"], ...rows.map(row => [row.key, row.currentObserved === false ? "Not returned" : row.clicks, row.currentObserved === false ? "Not returned" : row.impressions, row.currentObserved === false ? "Not returned" : `${(row.ctr * 100).toFixed(2)}%`, row.currentObserved === false ? "Not returned" : row.position, row.previousObserved === false ? "Not returned" : row.previousClicks, row.currentObserved !== false && row.previousObserved !== false ? row.clickChangePercent ?? "No baseline" : "Not returned"])].map(row => row.map(cell).join(",")).join("\r\n");
+    download("signal-search-keywords.csv", "\uFEFF" + csv, "text/csv;charset=utf-8");
+  };
+  const reportData = report?.data;
+  return <section className="card live-panel keywords-panel">
+    <div className="live-panel-heading"><div><h2>Search keywords</h2><p>{report ? `Search Console · ${reportData?.startDate} to ${reportData?.endDate} · saved ${when(report.fetchedAt)}` : "Load a Google report to see queries returned by Search Console."}</p></div>{!!reportData?.queries?.length && <button className="button secondary no-print" onClick={exportRows}>Export CSV</button>}</div>
+    {error && <div className="notice error-notice" role="alert">Latest refresh failed: {error}. {report ? `Showing the last saved data from ${when(report.fetchedAt)}.` : "No saved keyword report is available."}</div>}
+    {reportData?.errors?.map((item, index) => <p className="form-error" role="status" key={`${index}:${item}`}>{item}</p>)}
+    {!reportData?.queries?.length ? <p className="body-copy">{reportData ? "No query rows were returned for this period. Search Console omits some low-volume and anonymized searches." : "Connect Search Console and load a report from Overview or Integrations. Keyword metrics will appear here once saved."}</p> : <>
+      <div className="keywords-toolbar"><label htmlFor="keyword-filter">Filter queries</label><input id="keyword-filter" type="search" value={filter} onChange={event => setFilter(event.target.value)} placeholder="Type a keyword or phrase"/><span>{rows.length} of {reportData.queries.length} queries</span></div>
+      <div className="table-scroll" tabIndex={0} aria-label="Search keywords table"><table><thead><tr><th scope="col">Search query</th>{([ ["clicks", "Clicks"], ["impressions", "Impressions"], ["ctr", "CTR"], ["position", "Average position"] ] as const).map(([key, label]) => <th scope="col" key={key}><button className="keyword-sort" aria-label={`Sort by ${label}`} onClick={() => setOrder(key)}>{label}{sort === key ? ascending ? " ↑" : " ↓" : ""}</button></th>)}<th scope="col">Previous clicks</th><th scope="col">Click change</th></tr></thead><tbody>{rows.length ? rows.map(row => <tr key={row.key}><th scope="row">{row.key}</th><td>{row.currentObserved === false ? "Not returned" : number(row.clicks)}</td><td>{row.currentObserved === false ? "Not returned" : number(row.impressions)}</td><td>{row.currentObserved === false ? "Not returned" : `${number(row.ctr * 100)}%`}</td><td>{row.currentObserved === false ? "Not returned" : number(row.position)}</td><td>{row.previousObserved === false ? "Not returned" : number(row.previousClicks)}</td><td>{row.currentObserved !== false && row.previousObserved !== false ? percent(row.clickChangePercent) : "Not returned"}</td></tr>) : <tr><td className="empty-row" colSpan={7}>No queries match this filter.</td></tr>}</tbody></table></div>
+      <p className="audit-scope">Search Console returns up to 1,000 top queries per period. Low-volume and anonymized queries may be omitted, so rows may not add up to the total. Average position is impression-weighted. Search volume and complete rank tracking are not provided by this report.</p>
+    </>}
+  </section>;
+}
+
 function InsightTable({ title, rows }: { title: string; rows?: SearchInsight[] }) {
   const omitted = rows?.some(r => r.currentObserved === false || r.previousObserved === false);
   const current = (r: SearchInsight, value: number) => r.currentObserved === false ? "Not returned" : value;
