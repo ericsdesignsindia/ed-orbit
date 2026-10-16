@@ -197,6 +197,19 @@ button, input, select, textarea { accent-color: var(--brand-yellow-deep); }
 .live-app .button.primary:hover:not(:disabled) { background: #ffe84a; }
 .live-app .button.secondary { border-color: #dedfd9; color: #343633; background: #fff; }
 .live-app .button.secondary:hover:not(:disabled) { border-color: #c7c8c1; background: #f8f8f5; }
+.sf-import-panel h2 { display: flex; align-items: center; gap: 8px; }
+.sf-import-panel h2 svg { color: #e4bd00; }
+.sf-import-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 15px 0; padding-left: 20px; color: #647066; font-size: 12px; line-height: 1.55; }
+.sf-import-steps li { padding-right: 8px; }
+.sf-import-steps strong { color: #37463d; }
+.sf-import-actions { margin: 12px 0; }
+.sf-file-picker { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.sf-file-picker input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.sf-file-picker:focus-within { outline: 3px solid rgba(238, 205, 0, .32); outline-offset: 2px; }
+.sf-import-preview { display: grid; gap: 7px; margin-top: 12px; padding: 14px; border: 1px solid #e5ebdc; border-radius: 8px; background: #f9fbf5; color: #536156; font-size: 12px; }
+.sf-import-preview strong { color: #37463d; }
+.sf-import-preview small { color: #879287; }
+.sf-import-preview .button { justify-self: start; margin-top: 4px; }
 .live-app .card { border-color: var(--brand-line); border-radius: 14px; background: #fff; box-shadow: var(--brand-shadow); }
 .live-app .kpi { padding: 19px 20px; }
 .live-app .kpi-value { color: #171717; }
@@ -312,6 +325,7 @@ html[data-theme="dark"] :is(.modal-heading h2, .local-modal-heading h2, .live-ap
   .social-content, .live-app .content, .local-content { padding-inline: 24px; }
 }
 @media (max-width: 760px) {
+  .sf-import-steps { grid-template-columns: 1fr; gap: 8px; }
   .social-sidebar { width: 280px; }
   .social-topbar, .local-topbar, .live-app .topbar { height: 58px; padding-inline: 16px; }
   .social-content, .live-app .content, .local-content { padding: 24px 16px; }

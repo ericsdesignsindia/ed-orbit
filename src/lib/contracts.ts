@@ -3,8 +3,9 @@ import type { GoogleReport } from "./google";
 export type SiteRecord = { id: string; name: string; url: string; domain: string; archived: boolean; createdAt: string; bindings: { siteUrl: string; propertyId: string } };
 export type SeoIssue = { id: string; code: string; title: string; severity: "critical" | "warning" | "info"; url: string; detail: string; recommendation: string; change?: "new" | "ongoing" | "resolved" | "not-rechecked" };
 export type CrawlPage = { url: string; finalUrl: string; status: number; title: string; description: string; canonical: string; h1Count: number; noindex: boolean; internalLinks: string[]; redirectCount: number; error?: string };
-export type CrawlResult = { id: string; siteUrl: string; startedAt: string; completedAt: string; score: number; pages: CrawlPage[]; issues: SeoIssue[]; limitations: string[]; requests: number };
+export type CrawlResult = { id: string; siteUrl: string; startedAt: string; completedAt: string; score: number; pages: CrawlPage[]; issues: SeoIssue[]; limitations: string[]; requests: number; source?: "native" | "screaming-frog" };
 export type SavedCrawl = CrawlResult & { websiteId: string };
+export type CrawlImportData = Omit<CrawlResult, "id" | "siteUrl">;
 export type SavedReport = { id: string; websiteId: string; fetchedAt: string; days: 7 | 30 | 90; data: GoogleReport };
 export type JobKind = "audit" | "report" | "traffic-alert";
 export type ScheduleRecord = { id: string; websiteId: string; kind: JobKind; enabled: boolean; cadence: "daily" | "weekly"; time: string; timezone: string; weekday: number; nextRunAt: string; lastRunAt?: string; maxPages: number; days: 7 | 30 | 90; dropPercent: number; minClicks: number; notificationEmail?: string };
@@ -22,5 +23,6 @@ export type WorkspaceAction =
   | { action: "delete-schedule"; id: string }
   | { action: "read-notifications" }
   | { action: "save-report"; websiteId: string; days: 7 | 30 | 90; data: GoogleReport }
+  | { action: "import-screaming-frog"; websiteId: string; crawl: CrawlImportData }
   | { action: "import-legacy"; raw: string }
   | { action: "restore"; backup: unknown; confirmed: true };

@@ -40,7 +40,7 @@ export async function readWorkspaceBody(request: Request): Promise<unknown> {
   let value: unknown;
   try { value = JSON.parse(Buffer.concat(chunks).toString("utf8")); } catch { throw new WorkspaceError("Invalid JSON."); }
   const action = value && typeof value === "object" && "action" in value ? value.action : undefined;
-  const limit = action === "restore" ? 26 * 1024 * 1024 : action === "import-legacy" || action === "save-report" || action === "hydrate-and-dispatch" ? 6 * 1024 * 1024 : 256 * 1024;
+  const limit = action === "restore" ? 26 * 1024 * 1024 : action === "import-screaming-frog" ? 16 * 1024 * 1024 : action === "import-legacy" || action === "save-report" || action === "hydrate-and-dispatch" ? 6 * 1024 * 1024 : 256 * 1024;
   if (length > limit) throw new WorkspaceError("Request is too large for this action.", 413);
   return value;
 }

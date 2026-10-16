@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import LiveDashboard from "../live-dashboard";
 
 export const metadata: Metadata = {
-  title: "SEO Command Center",
-  description: "A workspace for website audits, organic reporting, and SEO operations.",
+  title: "Screaming Frog SEO workspace | SIGNAL",
+  description: "Import Screaming Frog SEO Spider crawl exports, review issues, and keep crawl history with your organic search reports.",
 };
 
 export default function SeoPage() {

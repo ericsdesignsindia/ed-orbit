@@ -43,7 +43,9 @@ export const isGoogleReport = object({
   comparison: optional(object({ previous: object(metrics), changes: object({ clicksPercent: changePercent, impressionsPercent: changePercent }), startDate: date, endDate: date })),
 });
 const issue = object({ id: str(200), code: str(200), title: str(1000), severity: one("critical", "warning", "info"), url: str(), detail: str(20000), recommendation: str(10000), change: optional(one("new", "ongoing", "resolved", "not-rechecked")) });
-const crawl = object({ id, websiteId: id, siteUrl: url, startedAt: date, completedAt: date, score: num(0, 100), pages: array(object({ url: str(), finalUrl: str(), status: integer(0, 599), title: str(20000), description: str(20000), canonical: str(), h1Count: integer(0, 100000), noindex: bool, internalLinks: array(str(), 10000), redirectCount: integer(0, 100), error: optional(str(2000)) }), 100), issues: array(issue, 20000), limitations: array(str(10000), 1000), requests: integer(0, 100000) });
+const crawlPage = object({ url: str(), finalUrl: str(), status: integer(0, 599), title: str(20000), description: str(20000), canonical: str(), h1Count: integer(0, 100000), noindex: bool, internalLinks: array(str(), 10000), redirectCount: integer(0, 100), error: optional(str(2000)) });
+const crawl = object({ id, websiteId: id, siteUrl: url, startedAt: date, completedAt: date, score: num(0, 100), pages: array(crawlPage, 10000), issues: array(issue, 20000), limitations: array(str(10000), 1000), requests: integer(0, 100000), source: optional(one("native", "screaming-frog")) });
+const crawlImport = object({ source: one("screaming-frog"), startedAt: date, completedAt: date, score: num(0, 100), pages: array(crawlPage, 10000), issues: array(issue, 20000), limitations: array(str(10000), 1000), requests: integer(1, 10000) });
 const report = object({ id, websiteId: id, fetchedAt: date, days: one(7, 30, 90), data: isGoogleReport });
 const job = object({ id, websiteId: id, kind, status: one("queued", "running", "success", "failed"), createdAt: date, startedAt: optional(date), completedAt: optional(date), attempt: integer(0, 3), summary: str(4000), error: optional(str(2000)), resultId: optional(id), scheduleId: optional(id), ...options });
 const schedule = object({ id, websiteId: id, kind, enabled: bool, cadence: one("daily", "weekly"), time: v => typeof v === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(v), timezone: v => typeof v === "string" && validTimezone(v), weekday: integer(0, 6), nextRunAt: date, lastRunAt: optional(date), ...options });
@@ -107,6 +109,7 @@ export function createStore(path = ":memory:") {
       "save-schedule": object({ action: one("save-schedule"), schedule: object({ id: optional(id), websiteId: id, kind, enabled: optional(bool), cadence: optional(one("daily", "weekly")), time: optional(str(5)), timezone: optional(str(100)), weekday: optional(integer(0, 6)), maxPages: optional(options.maxPages), days: optional(options.days), dropPercent: optional(options.dropPercent), minClicks: optional(options.minClicks), notificationEmail: options.notificationEmail }) }),
       "delete-schedule": object({ action: one("delete-schedule"), id }), "read-notifications": object({ action: one("read-notifications") }),
       "save-report": object({ action: one("save-report"), websiteId: id, days: one(7, 30, 90), data: isGoogleReport }),
+      "import-screaming-frog": object({ action: one("import-screaming-frog"), websiteId: id, crawl: crawlImport }),
       "import-legacy": object({ action: one("import-legacy"), raw: str(6 * 1024 * 1024) }), "restore": object({ action: one("restore"), backup: () => true, confirmed: one(true) }),
     };
     if (!Object.hasOwn(shapes, a.action) || !shapes[a.action](a)) throw new WorkspaceError("Invalid workspace action or fields.");
@@ -122,6 +125,13 @@ export function createStore(path = ":memory:") {
         case "delete-schedule": s.schedules = s.schedules.filter(x => x.id !== a.id); break;
         case "read-notifications": s.notifications.forEach(x => { x.read = true; }); break;
         case "save-report": requireSite(s, a.websiteId); s.reports.unshift({ id: randomUUID(), websiteId: a.websiteId, fetchedAt: now, days: a.days, data: a.data }); break;
+        case "import-screaming-frog": {
+          const site = requireSite(s, a.websiteId);
+          const rootDomain = site.domain.toLowerCase().replace(/^www\./, "");
+          if (a.crawl.pages.some(page => { try { const host = new URL(page.url).hostname.toLowerCase().replace(/^www\./, ""); return host !== rootDomain && !host.endsWith(`.${rootDomain}`); } catch { return true; } })) throw new WorkspaceError("The imported URLs must belong to the selected website.");
+          s.crawls.unshift({ ...a.crawl, id: randomUUID(), websiteId: site.id, siteUrl: site.url });
+          break;
+        }
         case "restore": { if (s.jobs.some(x => x.status === "running")) throw new WorkspaceError("Wait for the running job before restoring.", 409); const restored = structuredClone(a.backup) as AppSnapshot; const revision = s.revision; Object.assign(s, restored, { revision, runner: { active: false, localOnly: true } }); s.jobs.forEach(x => { if (["queued", "running"].includes(x.status)) { x.status = "failed"; x.completedAt = now; x.summary = "Restored historical job; enqueue again to run."; } }); s.schedules.forEach(x => { x.enabled = false; }); break; }
         case "import-legacy": {
           if (s.migrationComplete) throw new WorkspaceError("Legacy workspace has already been imported.", 409);
